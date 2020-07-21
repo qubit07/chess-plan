@@ -1,0 +1,21 @@
+<div class="card-deck mb-3 text-center">
+	<div class="card mb-4 shadow-sm">
+		<div class="card-header">
+			<h4 class="my-0 font-weight-normal">{{player.firstName}}
+				{{player.lastName}}</h4>
+		</div>
+		<div class="card-body">
+			<h1>{{ player.rating.elo }}</h1>
+			<ul class="list-unstyled mt-3 mb-4">
+				<button (click)="showTeam()" class="btn btn-lg btn-block border">
+					{{ player.teamName}}</button>
+			</ul>
+			<button type="button" class="btn btn-lg btn-block btn-primary">Games</button>
+		</div>
+	</div>
+
+</div>
+<div class="btn-group" role="group" aria-label="Basic example">
+	<button type="button" class="btn btn-success">Edit</button>
+	<button type="button" class="btn btn-danger">Delete</button>
+</div>

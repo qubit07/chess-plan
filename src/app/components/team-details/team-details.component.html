@@ -1,0 +1,38 @@
+<div class="rob mb-2">
+	<div class="col mb-6">
+		<div style="background: #7abaff;"
+			class="card flex-md-row mb-4 box-shadow h-md-250 justify-content-center">
+			<h2>
+				<b>Team {{ team.name }} </b>
+			</h2>
+		</div>
+	</div>
+	<div class="col mb-6">
+		<div class="card flex-md-row mb-4 box-shadow h-md-250">
+			<table class="table table-hover">
+				<thead class="table-primary">
+					<tr>
+						<th class="col-md-1" scope="col">#</th>
+						<th class="col-md-4" scope="col">Last Name</th>
+						<th class="col-md-4" scope="col">First Name</th>
+						<th class="col-md-3" scope="col">Elo</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="clickable" *ngFor="let player of players"
+						[routerLink]="['/players/', player.id]">
+						<td>{{player.id}}</td>
+						<td>{{player.lastName}}</td>
+						<td>{{player.firstName}}</td>
+						<td>{{player.rating.elo}}</td>
+
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<div *ngIf="players?.length == 0"
+			class="alert alert-warning col-md-12" role="alert">No players
+			found.</div>
+	</div>
+</div>

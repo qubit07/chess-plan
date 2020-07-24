@@ -13,41 +13,47 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TeamListComponent } from './components/team-list/team-list.component';
 import { TeamDetailsComponent } from './components/team-details/team-details.component';
 import { TournamentFormComponent } from './components/tournament-form/tournament-form.component';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { TournamentPlayerListComponent } from './components/tournament-player-list/tournament-player-list.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'tournaments', component: TournamentListComponent },
-  { path: 'tournaments/:id', component: TournamentDetailsComponent },
-  { path: 'tournaments/:id/edit', component: TournamentFormComponent },
-  { path: 'players', component: PlayerListComponent },
-  { path: 'players/:id', component: PlayerDetailsComponent },
-  { path: 'teams', component: TeamListComponent },
-  { path: 'teams/:id', component: TeamDetailsComponent },
-  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
+	{ path: 'dashboard', component: DashboardComponent },
+	{ path: 'tournaments', component: TournamentListComponent },
+	{ path: 'tournaments/add', component: TournamentFormComponent },
+	{ path: 'tournaments/:id', component: TournamentDetailsComponent },
+	{ path: 'tournaments/:id/edit', component: TournamentFormComponent },
+	{ path: 'tournaments/:id/players', component: TournamentPlayerListComponent },
+	{ path: 'players', component: PlayerListComponent },
+	{ path: 'players/:id', component: PlayerDetailsComponent },
+	{ path: 'teams', component: TeamListComponent },
+	{ path: 'teams/:id', component: TeamDetailsComponent },
+	{ path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TournamentListComponent,
-    SearchComponent,
-    PlayerListComponent,
-    PlayerDetailsComponent,
-    DashboardComponent,
-    TournamentDetailsComponent,
-    TeamListComponent,
-    TeamDetailsComponent,
-    TournamentFormComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		TournamentListComponent,
+		SearchComponent,
+		PlayerListComponent,
+		PlayerDetailsComponent,
+		DashboardComponent,
+		TournamentDetailsComponent,
+		TeamListComponent,
+		TeamDetailsComponent,
+		TournamentFormComponent,
+		TournamentPlayerListComponent
+	],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		RouterModule.forRoot(routes),
+		FormsModule,
+		ReactiveFormsModule,
+		ModalModule.forRoot()
+	],
+	providers: [BsModalService],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

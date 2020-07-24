@@ -3,7 +3,7 @@
 		<div style="background: #7abaff;"
 			class="card flex-md-row mb-4 box-shadow h-md-250 justify-content-center">
 			<h2>
-				<b>Players</b>
+				<b>Tournament {{ tournament.name }} </b>
 			</h2>
 		</div>
 	</div>
@@ -15,16 +15,14 @@
 						<th class="col-md-4" scope="col">Last Name</th>
 						<th class="col-md-4" scope="col">First Name</th>
 						<th class="col-md-3" scope="col">Elo</th>
-						<th class="col-md-3" scope="col">Team</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="clickable" *ngFor="let player of players"
-						[routerLink]="['/players', player.id]">
+						[routerLink]="['/players/', player.id]">
 						<td>{{player.lastName}}</td>
 						<td>{{player.firstName}}</td>
 						<td>{{player.rating.elo}}</td>
-						<td>{{player.teamName}}</td>
 
 					</tr>
 				</tbody>
@@ -35,9 +33,4 @@
 			class="alert alert-warning col-md-12" role="alert">No players
 			found.</div>
 	</div>
-	<div>
-	<button class="btn btn-primary badge-pill mb-2 pull-right" routerLink="/players/form">Add Player</button>
 </div>
-
-</div>
-

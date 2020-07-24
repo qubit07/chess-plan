@@ -8,78 +8,89 @@
 		</div>
 	</div>
 	<div class="col mb-6">
-		<form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
+		<form [formGroup]="tournamentFormGroup" (ngSubmit)="onSubmit()">
 			<div class="form-group">
 				<label for="tournamentName">Name</label> <input type="text"
-					class="form-control" id="tournamentName"
+					class="form-control" formControlName="name" id="tournamentName"
 					aria-describedby="tournamentName"
 					placeholder="Enter tournament name" value="{{ tournament.name }}">
 			</div>
 			<div class="form-group">
-				<label for="type">Type</label> <select
-					class="custom-select d-block w-100" id="type" required>
-					<option selected="selected">Classic</option>
-					<option>Rapid</option>
-					<option>Blitz</option>
+				<label for="type">Type</label> <select name="type"
+					class="custom-select d-block w-100" id="type" required
+					formControlName="type">
+					<option *ngFor="let type of types"
+						[selected]="type==tournament.type">{{type}}</option>
 				</select> <small id="typeHelp" class="form-text text-muted">Modus
 					that will be played, for example Blitz</small>
 			</div>
 			<div class="form-group">
-				<label for="system">System</label> 
-				<select class="custom-select d-block w-100" id="system" required>
-					 <option [value]="tournament.system" *ngFor="let system of systems">            
-					  {{system}}
-					  </option>
-				</select> 
-				<small id="systemHelp" class="form-text text-muted">System
+				<label for="system">System</label> <select name="system"
+					formControlName="system" class="custom-select d-block w-100"
+					id="system" required>
+					<option *ngFor="let system of systems">{{system}}</option>
+				</select> <small id="systemHelp" class="form-text text-muted">System
 					of the Tournament, for example Round-System</small>
 			</div>
 			<div class="form-group">
 				<label for="players">Number of players</label> <input type="text"
-					class="form-control" id="players" aria-describedby="players"
-					placeholder="Enter number of players"
+					formControlName="numberOfPlayers" class="form-control" id="players"
+					aria-describedby="players" placeholder="Enter number of players"
 					value="{{ tournament.numberOfPlayers}}">
 			</div>
 
 			<hr>
 			<h4 class="mb-3">Timeline</h4>
 			<div class="form-group">
-				<label for="tournamentStartDate">Start Date</label> 
-				<input
+				<label for="tournamentStartDate">Start Date</label> <input
 					type="date" class="form-control" id="tournamentStartDate"
-					placeholder="Start Date" [value]="tournament.startDate | date:'yyyy-MM-dd'">
+					formControlName="startDate" placeholder="Start Date"
+					[value]="tournament.startDate | date:'yyyy-MM-dd'">
 			</div>
 			<div class="form-group">
 				<label for="tournamentEndDate">End Date</label> <input type="date"
-					class="form-control" id="tournamentEndDate" 
-					placeholder="End Date" [value]="tournament.endDate | date:'yyyy-MM-dd'">
+					formControlName="endDate" class="form-control"
+					id="tournamentEndDate" placeholder="End Date"
+					[value]="tournament.endDate | date:'yyyy-MM-dd'">
 			</div>
 
 			<hr>
-			<h4 class="mb-3">Location</h4>
-			<div class="form-group">
-				<label for="country">Country</label> <input type="text"
-					class="form-control" id="country" aria-describedby="country"
-					placeholder="Enter tournament location country"
-					value="{{ tournament.address.country }}">
+			<div formGroupName="address" class="form-area">
+				<h4 class="mb-3">Location</h4>
+				<div class="form-group">
+					<label for="country">Country</label> <input type="text"
+						formControlName="country" class="form-control" id="country"
+						aria-describedby="country"
+						placeholder="Enter tournament location country"
+						value="{{ tournament.address.country }}">
+				</div>
+
+				<div class="form-group">
+					<label for="city">City</label> <input type="text"
+						formControlName="city" class="form-control" id="city"
+						aria-describedby="city"
+						placeholder="Enter tournament location city"
+						value="{{ tournament.address.city }}">
+				</div>
+
+				<div class="form-group">
+					<label for="street">Street</label> <input type="text"
+						formControlName="street" class="form-control" id="street"
+						aria-describedby="street"
+						placeholder="Enter tournament location street"
+						value="{{ tournament.address.street }}">
+				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="city">City</label> <input type="text"
-					class="form-control" id="city" aria-describedby="city"
-					placeholder="Enter tournament location city"
-					value="{{ tournament.address.city }}">
+			<div class="card p-2">
+				<div class="btn-group">
+					<button [routerLink]="['/tournaments']"
+						class="btn btn-secondary pull-right">Back</button>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+				
 			</div>
 
-			<div class="form-group">
-				<label for="street">Street</label> <input type="text"
-					class="form-control" id="street" aria-describedby="street"
-					placeholder="Enter tournament location street"
-					value="{{ tournament.address.street }}">
-			</div>
-
-
-			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 
 	</div>

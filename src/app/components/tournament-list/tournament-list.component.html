@@ -8,11 +8,15 @@
 		</div>
 	</div>
 	<div class="col mb-6">
+		<div class="card p-2">
+			<div class="btn-group">
+				<button class="btn btn-primary" [routerLink]="['/tournaments', 'add']">Add</button>
+			</div>
+		</div>
 		<div class="card flex-md-row mb-4 box-shadow h-md-250">
 			<table class="table table-hover">
 				<thead class="table-primary">
 					<tr>
-						<th class="col-md-1" scope="col">#</th>
 						<th class="col-md-6" scope="col">Name</th>
 						<th class="col-md-2" scope="col">Participants</th>
 
@@ -21,7 +25,6 @@
 				<tbody>
 					<tr class="clickable" *ngFor="let tournament of tournaments"
 						[routerLink]="['/tournaments/', tournament.id]">
-						<td class="align-middle">{{tournament.id}}</td>
 						<td class="align-middle">{{tournament.name}}</td>
 						<td class="align-middle">{{tournament.participants}}</td>
 					</tr>

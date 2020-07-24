@@ -4,35 +4,40 @@ import { Tournament } from '../entity/tournament';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TournamentService {
 
-  private tournamentUrl = 'http://localhost:8080/api/tournaments';
+	private tournamentUrl = 'http://localhost:8080/api/tournaments';
 
-  headers = new HttpHeaders({
-    'Content-Type': 'application/json'
-  });
+	headers = new HttpHeaders({
+		'Content-Type': 'application/json'
+	});
 
-  constructor(private httpClient: HttpClient) { }
+	constructor(private httpClient: HttpClient) { }
 
 
-  getTournamentList(): Observable<Tournament[]> {
-    return this.httpClient.get<Tournament[]>(this.tournamentUrl);
-  }
+	getTournamentList(): Observable<Tournament[]> {
+		return this.httpClient.get<Tournament[]>(this.tournamentUrl);
+	}
 
-  createTournament(tournament: Tournament): Observable<Tournament> {
-    return this.httpClient.post<Tournament>(
-      this.tournamentUrl,
-      JSON.stringify(tournament),
-      { headers: this.headers }
-    );
-  }
+	createTournament(tournament: Tournament): Observable<Tournament> {
+		return this.httpClient.post<Tournament>(
+			this.tournamentUrl,
+			JSON.stringify(tournament),
+			{ headers: this.headers }
+		);
+	}
 
-  getTournamentById(id: number): Observable<Tournament> {
-    const tournamentDetailsUrl = `${this.tournamentUrl}/${id}`;
-    return this.httpClient.get<Tournament>(tournamentDetailsUrl);
-  }
+	getTournamentById(id: number): Observable<Tournament> {
+		const tournamentDetailsUrl = `${this.tournamentUrl}/${id}`;
+		return this.httpClient.get<Tournament>(tournamentDetailsUrl);
+	}
+
+	deleteTournament(id: number): Observable<Tournament> {
+		const tournamentDetailsUrl = `${this.tournamentUrl}/${id}`;
+		return this.httpClient.delete<Tournament>(tournamentDetailsUrl);
+	}
 
 }
 

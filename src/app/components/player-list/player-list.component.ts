@@ -12,6 +12,10 @@ export class PlayerListComponent implements OnInit {
 
   players: Player[] = [];
 
+  pageNumber: number = 1;
+  pageSize: number = 5;
+  totalElements: number = 0;
+
   constructor(private playerService: PlayerService, private router: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,6 +30,12 @@ export class PlayerListComponent implements OnInit {
     return (data) => {
       this.players = data._embedded.players;
     }
+  }
+
+  updatePageSize(pageSize: number){
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listPlayers();
   }
 
   deletePlayer() {

@@ -14,11 +14,13 @@ export class TournamentPlayerListComponent implements OnInit {
 
 	tournament: Tournament = new Tournament();
 	players: Player[] = [];
+	tournamentPlayers: Player[] = [];
 
 	constructor(private tournamentService: TournamentService, private route: ActivatedRoute, private playerService: PlayerService) { }
 
 	ngOnInit() {
 		this.getTournament();
+		this.listPlayers();
 		this.getPlayersByTournamentId();
 	}
 
@@ -34,13 +36,32 @@ export class TournamentPlayerListComponent implements OnInit {
 
 	getPlayersByTournamentId() {
 		const tournamentId: number = +this.route.snapshot.paramMap.get('id');
-		this.playerService.getPlayersByTournament(tournamentId).subscribe(this.getResult());
+		this.playerService.getPlayersByTournament(tournamentId).subscribe(this.getTournamentPlayerResult());
 	}
 
-	getResult() {
+	listPlayers() {
+		this.playerService.getPlayerList().subscribe(this.getPlayerResult());
+	}
+
+	getPlayerResult() {
 		return (data) => {
 			this.players = data._embedded.players;
 		}
 	}
 
+	getTournamentPlayerResult() {
+		return (data) => {
+			this.tournamentPlayers = data._embedded.players;
+		}
+	}
+
+	hasPlayerJoinedTournament(player: Player) {
+		let numberContains = 0;
+		this.tournamentPlayers.forEach(e => {
+			if (e.id == player.id) {
+				numberContains++;
+			}
+		});
+		return numberContains;
+	}
 }

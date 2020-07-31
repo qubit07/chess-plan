@@ -3,54 +3,38 @@
 		<div style="background: #7abaff;"
 			class="card flex-md-row mb-4 box-shadow h-md-250 justify-content-center">
 			<h2>
-				<b>Tournament Details</b>
+				<b>Player Details</b>
 			</h2>
 		</div>
 	</div>
 	<div class="col mb-6">
 
-		
-<div class="card mb-4 shadow-sm">
-		<div class="card-header">
-			<h4 class="my-0 font-weight-normal">{{player.firstName}}
-				{{player.lastName}}</h4>
-		</div>
-		<div class="card-body">
-			<h1>{{ player.rating.elo }}</h1>
-			<ul class="list-unstyled mt-3 mb-4">
-				<button (click)="showTeam()" class="btn btn-lg btn-block border">
-					{{ player.teamName}}</button>
-			</ul>
-			<button type="button" class="btn btn-lg btn-block btn-primary">Games</button>
-		</div>
-	</div>
-	
 
-			<div class="card p-2">
-				<div class="btn-group">
+		<div class="card mb-4 shadow-sm">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">{{player.firstName}}
+					{{player.lastName}}</h4>
+			</div>
+			<div class="card-body">
+				<h1>{{ player.rating.elo }}</h1>
+				<ul class="list-unstyled mt-3 mb-4">
+					<button (click)="showTeam()" class="btn btn-info btn-lg btn-block border">
+						{{ player.teamName}}</button>
+				</ul>
+				<button type="button" class="btn btn-lg btn-block btn-primary">Games</button>
+			</div>
+		</div>
+
+
+		<div class="card p-2">
+			<div class="btn-group">
 				<button [routerLink]="['/players']" class="btn btn-secondary">Back</button>
 
-				<button [routerLink]="['/players', player.id]"
-					type="submit" class="btn btn-primary">Edit</button>
-
-				<button (click)="openModal(template)" type="button"
-					class="btn btn-danger pull-right">Delete</button>
-				<br> <br>
-				<pre class="card card-block card-header">{{message}}</pre>
-				<ng-template #template>
-				<div class="modal-body text-center">
-					<p>Delete {{ player.firstName  }} {{ player.lastName  }} ?</p>
-					<div class="btn-group">
-						<button type="button" class="btn btn-danger" (click)="confirm()">Yes</button>
-						<button type="button" class="btn btn-primary" (click)="decline()">No</button>
-					</div>
-				</div>
-				</ng-template>
-				</div>
-				
 			</div>
 
 		</div>
+
+	</div>
 
 </div>
 

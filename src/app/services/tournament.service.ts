@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tournament } from '../entity/tournament';
+import { Round } from '../entity/round';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -32,6 +33,11 @@ export class TournamentService {
 	getTournamentById(id: number): Observable<Tournament> {
 		const tournamentDetailsUrl = `${this.tournamentUrl}/${id}`;
 		return this.httpClient.get<Tournament>(tournamentDetailsUrl);
+	}
+	
+	getRoundById(id: number): Observable<Round[]> {
+		const roundUrl = `${this.tournamentUrl}/${id}/rounds`;
+		return this.httpClient.get<Round[]>(roundUrl);
 	}
 
 	deleteTournament(id: number): Observable<Tournament> {

@@ -15,6 +15,10 @@ import { TeamDetailsComponent } from './components/team-details/team-details.com
 import { TournamentFormComponent } from './components/tournament-form/tournament-form.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { TournamentPlayerListComponent } from './components/tournament-player-list/tournament-player-list.component';
+import { RoundListComponent } from './components/round-list/round-list.component';
+import { GamescorePipe } from './pipes/gamescore.pipe';
+import { GameListComponent } from './components/game-list/game-list.component';
+import { GameDetailsComponent } from './components/game-details/game-details.component';
 
 const routes: Routes = [
 	{ path: 'dashboard', component: DashboardComponent },
@@ -23,6 +27,9 @@ const routes: Routes = [
 	{ path: 'tournaments/:id', component: TournamentDetailsComponent },
 	{ path: 'tournaments/:id/edit', component: TournamentFormComponent },
 	{ path: 'tournaments/:id/players', component: TournamentPlayerListComponent },
+	{ path: 'tournaments/:id/rounds', component: RoundListComponent },
+	{ path: 'rounds/:id/games', component: GameListComponent },
+	{ path: 'games/:id', component: GameDetailsComponent },
 	{ path: 'players', component: PlayerListComponent },
 	{ path: 'players/:id', component: PlayerDetailsComponent },
 	{ path: 'teams', component: TeamListComponent },
@@ -43,7 +50,11 @@ const routes: Routes = [
 		TeamListComponent,
 		TeamDetailsComponent,
 		TournamentFormComponent,
-		TournamentPlayerListComponent
+		TournamentPlayerListComponent,
+		RoundListComponent,
+		GamescorePipe,
+		GameListComponent,
+		GameDetailsComponent
 	],
 	imports: [
 		BrowserModule,

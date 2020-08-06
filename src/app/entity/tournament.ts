@@ -1,4 +1,5 @@
 import { Address } from './address';
+import { Round } from './round';
 
 export class Tournament {
 	id: number;
@@ -10,4 +11,5 @@ export class Tournament {
 	endDate: number;
 	address: Address = new Address();
 	participants: number;
+	rounds: Round[] = [];
 }

@@ -1,0 +1,76 @@
+<table class="table table-hover text-muted" id="gameTable" #gameTable>
+	<caption>
+		{{tournament.name}} <b>Round {{round.number}}</b>
+	</caption>
+		<thead>
+					<tr>
+						<th class="col-md-1" scope="col">Board</th>
+						<th class="col-md-4" scope="col">White Player</th>
+						<th class="col-md-3" scope="col">Score</th>
+						<th class="col-md-4" scope="col">BlackPlayer</th>
+					</tr>
+				</thead>
+	<tbody>
+	
+		<tr class="clickable" *ngFor="let game of games"
+			[routerLink]="['/games/', game.id]">
+			<td>
+				<div class="media-body pb-3 mb-0 small lh-125 ">
+					<h1>{{game.boardNumber}}</h1>
+				</div>
+			</td>
+			<td>
+				<div class="media">
+					<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"
+						xmlns="http://www.w3.org/2000/svg"
+						preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+						aria-label="Placeholder: 32x32">
+		<title>Placeholder</title><rect width="100%" height="100%"
+							fill="#007bff"></rect>
+		<text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+					<div class="media-body pb-3 mb-0 small lh-125 ">
+						<div
+							class="d-flex justify-content-between align-items-center w-100">
+							<strong class="text-gray-dark">{{game.whitePlayerName}}</strong>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="media-body pb-3 mb-0 small lh-125 ">
+					<h1>{{game.score | gamescore}}</h1>
+				</div>
+			</td>
+			<td>
+				<div class="media">
+					<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"
+						xmlns="http://www.w3.org/2000/svg"
+						preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+						aria-label="Placeholder: 32x32">
+		<title>Placeholder</title><rect width="100%" height="100%"
+							fill="#ff0000"></rect>
+		<text x="50%" y="50%" fill="#ff0000" dy=".3em">32x32</text></svg>
+					<div class="media-body pb-3 mb-0 small lh-125">
+						<div
+							class="d-flex justify-content-between align-items-center w-100">
+							<strong class="text-gray-dark">{{game.blackPlayerName}}</strong>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+<div *ngIf="games?.length == 0" class="alert alert-warning col-md-12"
+	role="alert">No Games found.</div>
+	
+	<div class="card p-2">
+	<div class="btn-group">
+		<button [routerLink]="['/tournaments', tournament.id, 'rounds']"
+			class="btn btn-secondary">
+			<span class="fa fa-arrow-left"></span> Back
+		</button>
+
+	</div>
+</div>

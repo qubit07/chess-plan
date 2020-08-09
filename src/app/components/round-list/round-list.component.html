@@ -13,7 +13,7 @@
 	<tbody>
 
 		<tr class="clickable" *ngFor="let round of rounds"
-			[routerLink]="['/rounds/', round.id, 'games']">
+			[routerLink]="['/tournaments/', tournament.id, 'rounds', round.id, 'games']">
 			<td>
 				<div class="media-body pb-3 mb-0 small lh-125 ">
 					<h1>{{round.number}}</h1>
@@ -31,7 +31,7 @@
 
 <div class="card p-2">
 	<div class="btn-group">
-		<button [routerLink]="['/tournaments', tournament.id]"
+		<button [routerLink]="['/rounds', tournament.id, 'tournament']"
 			class="btn btn-secondary">
 			<span class="fa fa-arrow-left"></span> Back
 		</button>

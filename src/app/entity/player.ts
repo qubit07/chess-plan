@@ -5,9 +5,8 @@ import { Tournament } from './tournament';
 export class Player {
 
 	id: number;
-	firstName: string;
-	lastName: string;
-	rating: Rating;
+	name: string;
+	rating: Rating = new Rating();
 	teamName: string;
 	tournaments: Tournament[] = [];
 

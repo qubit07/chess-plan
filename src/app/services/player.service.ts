@@ -37,6 +37,11 @@ export class PlayerService {
 		return this.httpClient.get<Player[]>(playerTeamUrl);
 	}
 
+	searchPlayersByName(name: string): Observable<Player[]> {
+		const playerTeamUrl = `${this.playerUrl}/search/findByNameContaining?name=${name}`;
+		return this.httpClient.get<Player[]>(playerTeamUrl);
+	}
+
 	deletePlayer(id: number): Observable<Player> {
 		const playerDetailUrl = `${this.playerUrl}/${id}`;
 		return this.httpClient.delete<Player>(playerDetailUrl);

@@ -4,41 +4,48 @@ import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
-  selector: 'app-player-list',
-  templateUrl: './player-list.component.html',
-  styleUrls: ['./player-list.component.css']
+	selector: 'app-player-list',
+	templateUrl: './player-list.component.html',
+	styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
 
-  players: Player[] = [];
+	players: Player[] = [];
 
-  pageNumber: number = 1;
-  pageSize: number = 5;
-  totalElements: number = 0;
+	searchMode: boolean = false;
 
-  constructor(private playerService: PlayerService, private router: ActivatedRoute) { }
+	constructor(private playerService: PlayerService, private router: ActivatedRoute, private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.listPlayers();
-  }
+	ngOnInit() {
+		this.route.paramMap.subscribe(() =>{
+			this.listPlayers();
+		});
+	}
 
-  listPlayers() {
-    this.playerService.getPlayerList().subscribe(this.getResult());
-  }
 
-   getResult() {
-    return (data) => {
-      this.players = data._embedded.players;
-    }
-  }
+	listPlayers() {
+		this.searchMode = this.route.snapshot.paramMap.has('keyword')
+		if (this.searchMode) {
+			this.handleSearchPlayers();
+		}
+		else {
+			this.handleListPlayers();
+		}
+	}
 
-  updatePageSize(pageSize: number){
-    this.pageSize = pageSize;
-    this.pageNumber = 1;
-    this.listPlayers();
-  }
+	handleListPlayers() {
+		this.playerService.getPlayerList().subscribe(this.getResult());
+	}
 
-  deletePlayer() {
-    console.log("delete player: ");
-  }
+	handleSearchPlayers() {
+		const keyword = this.route.snapshot.paramMap.get('keyword')
+		this.playerService.searchPlayersByName(keyword).subscribe(this.getResult());
+	}
+
+
+	getResult() {
+		return (data) => {
+			this.players = data._embedded.players;
+		}
+	}
 }

@@ -24,7 +24,6 @@ export class RoundListComponent implements OnInit {
 
 	getTournamentDetails() {
 		const id: number = +this.route.snapshot.paramMap.get('id');
-
 		this.tournamentService.getTournamentById(id).subscribe(
 			(data) => {
 				this.tournament = data;

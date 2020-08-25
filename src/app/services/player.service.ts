@@ -11,7 +11,7 @@ export class PlayerService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	private playerUrl = 'http://localhost:8080/api/players';
+	private playerUrl = 'http://localhost:8080/chessplan/api/players';
 
 	getPlayerList(): Observable<Player[]> {
 		return this.httpClient.get<Player[]>(this.playerUrl);
@@ -33,18 +33,17 @@ export class PlayerService {
 	}
 
 	getPlayersByTournament(id: number): Observable<Player[]> {
-		const playerTeamUrl = `${this.playerUrl}/search/findByTournaments_Id?id=${id}`;
-		return this.httpClient.get<Player[]>(playerTeamUrl);
+		const playerTournamentUrl = `${this.playerUrl}/search/findByTournamentId?id=${id}`;
+		return this.httpClient.get<Player[]>(playerTournamentUrl);
 	}
 
 	searchPlayersByName(name: string): Observable<Player[]> {
-		const playerTeamUrl = `${this.playerUrl}/search/findByNameContaining?name=${name}`;
-		return this.httpClient.get<Player[]>(playerTeamUrl);
+		const playerNameUrl = `${this.playerUrl}/search/findByNameContaining?name=${name}`;
+		return this.httpClient.get<Player[]>(playerNameUrl);
 	}
 
 	deletePlayer(id: number): Observable<Player> {
 		const playerDetailUrl = `${this.playerUrl}/${id}`;
 		return this.httpClient.delete<Player>(playerDetailUrl);
 	}
-
 }

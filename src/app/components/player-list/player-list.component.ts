@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/entity/player';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
@@ -14,10 +14,10 @@ export class PlayerListComponent implements OnInit {
 
 	searchMode: boolean = false;
 
-	constructor(private playerService: PlayerService, private router: ActivatedRoute, private route: ActivatedRoute) { }
+	constructor(private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
 	ngOnInit() {
-		this.route.paramMap.subscribe(() =>{
+		this.route.paramMap.subscribe(() => {
 			this.listPlayers();
 		});
 	}
@@ -34,18 +34,19 @@ export class PlayerListComponent implements OnInit {
 	}
 
 	handleListPlayers() {
-		this.playerService.getPlayerList().subscribe(this.getResult());
+		this.playerService.getPlayerList().subscribe((data) => {
+			this.players = data;
+		});
 	}
 
 	handleSearchPlayers() {
 		const keyword = this.route.snapshot.paramMap.get('keyword')
-		this.playerService.searchPlayersByName(keyword).subscribe(this.getResult());
+		this.playerService.searchPlayersByName(keyword).subscribe((data) => {
+			this.players = data;
+		});
 	}
 
-
-	getResult() {
-		return (data) => {
-			this.players = data._embedded.players;
-		}
+	search(value: string) {
+		this.router.navigateByUrl(`/players/search/${value}`);
 	}
 }

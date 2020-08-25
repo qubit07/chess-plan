@@ -4,25 +4,30 @@ import { Observable } from 'rxjs';
 import { Team } from '../entity/team';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TeamService {
 
-  private teamUrl = 'http://localhost:8080/api/teams';
+	private teamUrl = 'http://localhost:8080/chessplan/api/teams';
 
-  constructor(private httpClient: HttpClient) { }
+	constructor(private httpClient: HttpClient) { }
 
-  getTeamList(): Observable<Team[]> {
-    return this.httpClient.get<Team[]>(this.teamUrl);
-  }
+	getTeamList(): Observable<Team[]> {
+		return this.httpClient.get<Team[]>(this.teamUrl);
+	}
 
-  getTeamById(id: number): Observable<Team> {
-    const teamDetailsUrl = `${this.teamUrl}/${id}`;
-    return this.httpClient.get<Team>(teamDetailsUrl);
-  }
+	getTeamById(id: number): Observable<Team> {
+		const teamDetailsUrl = `${this.teamUrl}/${id}`;
+		return this.httpClient.get<Team>(teamDetailsUrl);
+	}
 
-  getTeamByPlayerId(id: number): Observable<Team> {
-    const playerTeamUrl = `${this.teamUrl}/${id}/teams`;
-    return this.httpClient.get<Team>(playerTeamUrl);
-  }
+	getTeamByPlayerId(id: number): Observable<Team> {
+		const playerTeamUrl = `${this.teamUrl}/${id}/teams`;
+		return this.httpClient.get<Team>(playerTeamUrl);
+	}
+
+	searchTeamsByName(name: string): Observable<Team[]> {
+		const teamNameUrl = `${this.teamUrl}/search/findByNameContaining?name=${name}`;
+		return this.httpClient.get<Team[]>(teamNameUrl);
+	}
 }

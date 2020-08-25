@@ -13,8 +13,7 @@ import { Round } from 'src/app/entity/round';
 export class RoundListComponent implements OnInit {
 
 	tournament: Tournament = new Tournament();
-	rounds: Round [] = [];
-	
+
 	constructor(private tournamentService: TournamentService, private route: ActivatedRoute) { }
 
 	ngOnInit() {
@@ -30,16 +29,23 @@ export class RoundListComponent implements OnInit {
 			}
 		);
 	}
-	
-	getRounds(){
+
+	getRounds() {
 		const id: number = +this.route.snapshot.paramMap.get('id');
-		this.tournamentService.getRoundById(id).subscribe(this.getRoundResult());
+		this.tournamentService.getRoundById(id).subscribe((data) => {
+			this.tournament.rounds = data;
+			this.tournament.rounds.sort((a, b) => a.number - b.number)
+		});
 	}
-	
-	getRoundResult() {
-    	return (data) => {
-      		this.rounds = data._embedded.rounds;
-    	}
-  	}
+
+	addRound() {
+		let round: Round = new Round();
+		round.number = this.tournament.rounds.length + 1;
+		round.startDate = this.tournament.startDate;
+		this.tournamentService.addRoundToTournament(this.tournament.id, round).subscribe(()=>{
+			this.getRounds();
+		});
+	}
+
 
 }

@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class GameService {
 
-	private gameUrl = 'http://localhost:8080/api/games';
-	private roundUrl = 'http://localhost:8080/api/rounds';
+	private gamesUrl = 'http://localhost:8080/chessplan/api/games';
+	private roundUrl = 'http://localhost:8080/chessplan/api/rounds';
 
 	headers = new HttpHeaders({
 		'Content-Type': 'application/json'
@@ -18,13 +18,25 @@ export class GameService {
 	constructor(private httpClient: HttpClient) { }
 
 
+	getGames(): Observable<Game[]> {
+		return this.httpClient.get<Game[]>(this.gamesUrl);
+	}
+
 	getGameById(id: number): Observable<Game> {
-		const gameDetailsUrl = `${this.gameUrl}/${id}`;
+		const gameDetailsUrl = `${this.gamesUrl}/${id}`;
 		return this.httpClient.get<Game>(gameDetailsUrl);
 	}
 
 	getGamesByRoundId(id: number): Observable<Game[]> {
 		const gameOfRoundsUrl = `${this.roundUrl}/${id}/games`;
 		return this.httpClient.get<Game[]>(gameOfRoundsUrl);
+	}
+
+	createGame(game: Game): Observable<Game> {
+		return this.httpClient.post<Game>(
+			this.gamesUrl,
+			JSON.stringify(game),
+			{ headers: this.headers }
+		);
 	}
 }

@@ -10,6 +10,7 @@ export class Player {
 	teamName: string;
 	tournaments: Tournament[] = [];
 
+
 	constructor() {
 	}
 }

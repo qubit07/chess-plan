@@ -1,7 +1,11 @@
+import { Player } from './player';
+import { Round } from './round';
+
 export class Game {
 	id: number;
-	score: number;
+	score: string;
 	boardNumber: number;
-	whitePlayerName: string;
-	blackPlayerName: string;
+	whitePlayer: Player = new Player();
+	blackPlayer: Player = new Player();
+	round: Round = new Round();
 }

@@ -1,36 +1,47 @@
-<div class="rob mb-2">
-	<div class="col mb-6">
-		<div style="background: #7abaff;"
-			class="card flex-md-row mb-4 box-shadow h-md-250 justify-content-center">
-			<h2>
-				<b>Teams</b>
-			</h2>
-		</div>
+<div class="input-group mb-3">
+	<input #searchInput type="text" class="form-control"
+		placeholder="Search for team name ..."
+		aria-label="Search for team name" aria-describedby="basic-addon2"
+		(keyup.enter)="search(searchInput.value)">
+	<div class="input-group-append">
+		<button class="btn btn-outline-secondary" type="button"
+			(click)="search(searchInput.value)">Search</button>
 	</div>
-	<div class="col mb-6">
-		<div class="card flex-md-row mb-4 box-shadow h-md-250">
-			<table class="table table-hover">
-				<thead class="table-primary">
-					<tr>
-						<th class="col-md-4" scope="col">Name</th>
-						<th class="col-md-3" scope="col">Members</th>
-
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="clickable" *ngFor="let team of teams"
-						[routerLink]="['/teams/', team.id]">
-						<td>{{team.name}}</td>
-						<td>{{team.members}}</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div>
-
-		<div *ngIf="teams?.length == 0" class="alert alert-warning col-md-12"
-			role="alert">No teams found.</div>
-	</div>
-
 </div>
+<table class="table table-hover text-muted">
+	<caption>
+		<b>Teams</b>
+	</caption>
+	<thead>
+		<tr>
+			<th class="col-md-4" scope="col">Name</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr class="clickable" *ngFor="let team of teams"
+			[routerLink]="['/teams/', team.id]">
+			<td>
+				<div class="media">
+					<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"
+						xmlns="http://www.w3.org/2000/svg"
+						preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+						aria-label="Placeholder: 32x32">
+		<title>Placeholder</title><rect width="100%" height="100%"
+							fill="#007bff"></rect>
+		<text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+					<div class="media-body pb-3 mb-0 small lh-125 ">
+						<div
+							class="d-flex justify-content-between align-items-center w-100">
+							<strong class="text-gray-dark">{{team.name}}</strong>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+<div *ngIf="teams?.length == 0" class="alert alert-warning col-md-12"
+	role="alert">No Teams found.</div>
 

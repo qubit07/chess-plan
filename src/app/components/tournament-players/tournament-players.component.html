@@ -1,3 +1,10 @@
+
+<h4
+	class="d-flex justify-content-between align-items-center mb-3 card-header">
+	<span class="text-muted">{{ tournament.name }}</span> <a
+			href="/tournaments/{{tournament.id}}/players"
+			class="badge badge-secondary"> {{ participants }} </a>
+</h4>
 <div class="input-group mb-3">
 	<input #searchInput type="text" class="form-control"
 		placeholder="Search for player name ..."
@@ -8,7 +15,23 @@
 			(click)="search(searchInput.value)">Search</button>
 	</div>
 </div>
-<table class="table table-hover text-muted">
+
+<div class="row" *ngIf="showMsg">
+	<div class="col-xs-12">
+		<p class="alert alert-success">
+			<strong>{{msg}}</strong>
+		</p>
+	</div>
+</div>
+<div class="row" *ngIf="errorMsg">
+	<div class="col-xs-12">
+		<p class="alert alert-danger">
+			<strong>{{msg}}</strong>
+		</p>
+	</div>
+</div>
+
+<table class="table text-muted">
 	<caption>
 		<b>Players</b>
 	</caption>
@@ -17,12 +40,11 @@
 			<th class="col-md-4" scope="col">Name</th>
 			<th class="col-md-2" scope="col">Elo</th>
 			<th class="col-md-3" scope="col">Team</th>
+			<th class="col-md-3" scope="col">Action</th>
 		</tr>
 	</thead>
 	<tbody>
-
-		<tr class="clickable" *ngFor="let player of players"
-			[routerLink]="['/players/', player.id]">
+		<tr *ngFor="let player of players">
 			<td>
 				<div class="media">
 					<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"
@@ -48,6 +70,15 @@
 			<td>
 				<div class="media-body pb-3 mb-0 small lh-125 ">
 					{{player.teamName}}</div>
+			</td>
+			<td>
+				<div class="btn-group btn-group-sm" role="group">
+					<button (click)="addPlayerToTournament(player)"
+						class="btn btn-success btn-lg">ADD</button>
+					<button (click)="removePlayerFromTournament(player)"
+						class="btn btn-danger btn-lg">REMOVE</button>
+				</div>
+
 			</td>
 		</tr>
 	</tbody>

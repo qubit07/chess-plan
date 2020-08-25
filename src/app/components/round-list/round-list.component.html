@@ -1,3 +1,18 @@
+<div class="table-title">
+	<div class="row">
+		<div class="col-sm-5">
+			<h2>
+				{{tournament.name}} <b>Rounds</b>
+			</h2>
+		</div>
+		<div class="col-sm-7">
+			<button class="btn btn-primary"
+				(click)="addRound()">
+				<span class="fa fa-plus"></span> Add New Round
+			</button>
+		</div>
+	</div>
+</div>
 <table class="table table-hover text-muted" id="gameTable" #gameTable>
 	<caption>
 		{{tournament.name}} <b>Rounds</b>
@@ -6,27 +21,25 @@
 		<tr>
 			<th class="col-md-1" scope="col">Number</th>
 			<th class="col-md-4" scope="col">Start Time</th>
-			<th class="col-md-4" scope="col">End Time</th>
 			<th class="col-md-3" scope="col">Type</th>
 		</tr>
 	</thead>
 	<tbody>
 
-		<tr class="clickable" *ngFor="let round of rounds"
-			[routerLink]="['/tournaments/', tournament.id, 'rounds', round.id, 'games']">
+		<tr class="clickable" *ngFor="let round of tournament.rounds"
+			[routerLink]="['/rounds/', round.id, 'games']">
 			<td>
 				<div class="media-body pb-3 mb-0 small lh-125 ">
 					<h1>{{round.number}}</h1>
 				</div>
 			</td>
-			<td>{{tournament.startDate| date : 'MMM d, y h:mm:ss a'}}</td>
-			<td>{{tournament.endDate| date : 'MMM d, y h:mm:ss a'}}</td>
+			<td>{{round.startDate| date : 'MMM d, y h:mm:ss a'}}</td>
 			<td>{{tournament.type}}</td>
 		</tr>
 	</tbody>
 
 </table>
-<div *ngIf="rounds?.length == 0" class="alert alert-warning col-md-12"
+<div *ngIf="tournament.rounds?.length == 0" class="alert alert-warning col-md-12"
 	role="alert">No Rounds found.</div>
 
 <div class="card p-2">

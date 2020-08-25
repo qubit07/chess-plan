@@ -3,27 +3,24 @@ import { Tournament } from 'src/app/entity/tournament';
 import { TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
-  selector: 'app-tournament-list',
-  templateUrl: './tournament-list.component.html',
-  styleUrls: ['./tournament-list.component.css']
+	selector: 'app-tournament-list',
+	templateUrl: './tournament-list.component.html',
+	styleUrls: ['./tournament-list.component.css']
 })
 export class TournamentListComponent implements OnInit {
 
-  tournaments: Tournament[] = [];
+	tournaments: Tournament[] = [];
 
-  constructor(private tournamentService: TournamentService) { }
+	constructor(private tournamentService: TournamentService) { }
 
-  ngOnInit() {
-    this.listProducts();
-  }
+	ngOnInit() {
+		this.listProducts();
+	}
 
-  listProducts() {
-    this.tournamentService.getTournamentList().subscribe(this.getResult());
-  }
+	listProducts() {
+		this.tournamentService.getTournamentList().subscribe((data) => {
+			this.tournaments = data;
+		});
+	}
 
-  getResult() {
-    return (data) => {
-      this.tournaments = data._embedded.tournaments;
-    }
-  }
 }

@@ -13,7 +13,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class PlayerDetailsComponent implements OnInit {
 
-	player: Player = new Player();
+	player: Player;
 	team: Team = new Team();
 	rating: Rating = new Rating();
 

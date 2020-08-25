@@ -1,8 +1,26 @@
+<div class="table-title">
+	<div class="row">
+		<div class="col-sm-5">
+			<h2>
+				{{tournament.name}} <b>Games</b>
+			</h2>
+		</div>
+		<div class="col-sm-7">
+			<button class="btn btn-primary" (click)="createGames()">
+				<span class="fa fa-plus"></span> Create Games
+			</button>
+		</div>
+	</div>
+</div>
 <table class="table table-hover text-muted" id="gameTable" #gameTable>
-	<caption>Games</caption>
+	<caption>
+		{{tournament.name}} <b>Round {{round.number}}</b>
+	</caption>
 	<thead>
 		<tr>
+			<th class="col-md-1" scope="col">Board</th>
 			<th class="col-md-4" scope="col">White Player</th>
+			<th class="col-md-3" scope="col">Score</th>
 			<th class="col-md-4" scope="col">BlackPlayer</th>
 		</tr>
 	</thead>
@@ -10,6 +28,11 @@
 
 		<tr class="clickable" *ngFor="let game of games"
 			[routerLink]="['/games/', game.id]">
+			<td>
+				<div class="media-body pb-3 mb-0 small lh-125 ">
+					<h1>{{game.boardNumber}}</h1>
+				</div>
+			</td>
 			<td>
 				<div class="media">
 					<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32"
@@ -25,6 +48,11 @@
 							<strong class="text-gray-dark">{{game.whitePlayer.name}}</strong>
 						</div>
 					</div>
+				</div>
+			</td>
+			<td>
+				<div class="media-body pb-3 mb-0 small lh-125 ">
+					<h1>{{game.score | gamescore}}</h1>
 				</div>
 			</td>
 			<td>
@@ -50,3 +78,13 @@
 </table>
 <div *ngIf="games?.length == 0" class="alert alert-warning col-md-12"
 	role="alert">No Games found.</div>
+
+<div class="card p-2">
+	<div class="btn-group">
+		<button [routerLink]="['/tournaments', tournament.id, 'rounds']"
+			class="btn btn-secondary">
+			<span class="fa fa-arrow-left"></span> Back
+		</button>
+
+	</div>
+</div>
